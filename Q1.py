@@ -1,4 +1,3 @@
-#Question 1
 #A. We downloaded the data from the World Development Indicators in .csv file.
 #B. We use open() to read the data.
 #C. We use plot() in matplotlib to plot the data in linechart.
@@ -14,14 +13,29 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-x=np.arange(2010,2020,1);
+
 fp=open("Data.csv");
 for i in fp:
-    a=i.rstrip("\n").split(",");
-    for j in range(0,len(a)):
-        if(a[j]==".."): continue;
-        a[j]=float(int(float(a[j])*100))/100;
+    a=[];
+    b=i.rstrip("\n").split(",");
+    k=0;
+    s=0;t=0;
+    for j in range(0,len(b)):
+        if(b[j]==".."): continue;
+        if(s==0): s=j;
+        a.append(float(int(float(b[j])*100))/100);
+        k=k+1;
+        t=j;
     print(a);
+
+    x=np.arange(2010+s-1,2010+t+1,int(10/k));
     plt.plot(x,a);
     plt.grid(True,color='g',linestyle='--',linewidth='1')
     plt.show();
+
+
+
+
+
+
+    
